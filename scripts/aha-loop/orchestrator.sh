@@ -323,15 +323,12 @@ EOF
 # Helper: Run AI with a prompt
 run_ai() {
   local prompt="$1"
-  local output=""
   
   if [[ "$TOOL" == "amp" ]]; then
-    output=$(echo "$prompt" | amp --dangerously-allow-all 2>&1 | tee /dev/stderr) || true
+    echo "$prompt" | amp --dangerously-allow-all 2>&1 || true
   else
-    output=$(echo "$prompt" | claude --dangerously-skip-permissions --print 2>&1 | tee /dev/stderr) || true
+    echo "$prompt" | claude --dangerously-skip-permissions --print 2>&1 || true
   fi
-  
-  echo "$output"
 }
 
 # Helper: Check if file exists and is recent
