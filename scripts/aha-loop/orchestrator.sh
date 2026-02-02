@@ -696,7 +696,29 @@ ${directives_ctx}"
       log_thought "$current_prd" "Complete" "### PRD Completed
 
 PRD $current_prd completed successfully."
-      
+
+      # Merge completed PRD branch back to main
+      local prd_json_file="$SCRIPT_DIR/prd.json"
+      if [ -f "$prd_json_file" ]; then
+        local prd_branch=$(jq -r '.branchName // empty' "$prd_json_file")
+        if [ -n "$prd_branch" ]; then
+          local current_branch=$(git branch --show-current)
+          if [ "$current_branch" = "$prd_branch" ]; then
+            echo "Merging $prd_branch into main..."
+            git checkout main
+            if git merge "$prd_branch" --no-ff -m "feat: Complete $current_prd - merge $prd_branch"; then
+              echo "Successfully merged $prd_branch into main"
+              log_thought "$current_prd" "Merge" "### Branch Merged
+
+Merged $prd_branch into main after PRD completion."
+            else
+              echo "Warning: Failed to merge $prd_branch into main. Manual merge may be required."
+              git checkout "$prd_branch"  # Return to PRD branch on failure
+            fi
+          fi
+        fi
+      fi
+
       # Check if milestone is complete
       local milestone_id=$(jq -r --arg id "$current_prd" '
         .milestones[] | 

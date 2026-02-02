@@ -20,6 +20,7 @@ Take a PRD (markdown file or text) and convert it to `prd.json` in the scripts/a
 ```json
 {
   "version": 2,
+  "prdId": "[PRD-XXX from roadmap or PRD filename]",
   "project": "[Project Name]",
   "branchName": "aha-loop/[feature-name-kebab-case]",
   "description": "[Feature description from PRD title/intro]",
@@ -54,6 +55,7 @@ Take a PRD (markdown file or text) and convert it to `prd.json` in the scripts/a
 | Field | Purpose |
 |-------|---------|
 | `version` | Schema version (always 2) |
+| `prdId` | PRD identifier (e.g., PRD-001) for commit message prefixes |
 | `changeLog` | Array of plan modifications made during execution |
 | `researchTopics` | Questions to investigate before implementing the story |
 | `researchCompleted` | Whether research phase is done for this story |
@@ -138,18 +140,19 @@ Frontend stories are NOT complete until visually verified. Aha Loop will use the
 ## Conversion Rules
 
 1. **Version**: Always set `"version": 2`
-2. **Each user story becomes one JSON entry**
-3. **IDs**: Sequential (US-001, US-002, etc.)
-4. **Priority**: Based on dependency order, then document order
-5. **All stories**: `passes: false`, `researchCompleted: false`, empty `notes`, `learnings`, `implementationNotes`
-6. **branchName**: Derive from feature name, kebab-case, prefixed with `aha-loop/`
-7. **Always add**: "Typecheck passes" to every story's acceptance criteria
-8. **researchTopics**: Extract from PRD's Research Topics section, or generate if story involves:
+2. **prdId**: Set from roadmap PRD ID (e.g., PRD-001) or derive from PRD filename
+3. **Each user story becomes one JSON entry**
+4. **IDs**: Sequential (US-001, US-002, etc.)
+5. **Priority**: Based on dependency order, then document order
+6. **All stories**: `passes: false`, `researchCompleted: false`, empty `notes`, `learnings`, `implementationNotes`
+7. **branchName**: Derive from feature name, kebab-case, prefixed with `aha-loop/`
+8. **Always add**: "Typecheck passes" to every story's acceptance criteria
+9. **researchTopics**: Extract from PRD's Research Topics section, or generate if story involves:
    - Unfamiliar third-party libraries
    - Multiple implementation approaches
    - Performance-sensitive code
    - Complex integrations
-9. **changeLog**: Initialize as empty array `[]`
+10. **changeLog**: Initialize as empty array `[]`
 
 ---
 
@@ -191,6 +194,7 @@ Add ability to mark tasks with different statuses.
 ```json
 {
   "version": 2,
+  "prdId": "PRD-001",
   "project": "TaskApp",
   "branchName": "aha-loop/task-status",
   "description": "Task Status Feature - Track task progress with status indicators",
@@ -302,6 +306,7 @@ Add ability to mark tasks with different statuses.
 Before writing prd.json, verify:
 
 - [ ] **Version set to 2**
+- [ ] **prdId set** (from roadmap or PRD filename, e.g., PRD-001)
 - [ ] **Previous run archived** (if prd.json exists with different branchName, archive it first)
 - [ ] Each story is completable in one iteration (small enough)
 - [ ] Stories are ordered by dependency (schema to backend to UI)

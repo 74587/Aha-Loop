@@ -129,7 +129,7 @@ Update story's `learnings` field with:
 
 **Commit Message:**
 ```
-feat: [STORY_ID] - [STORY_TITLE]
+feat: [PRD_ID]/[STORY_ID] - [STORY_TITLE]
 
 [Brief description of what was implemented]
 

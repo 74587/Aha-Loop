@@ -138,8 +138,9 @@ Check the story's state:
 8. **Commit changes:**
    ```bash
    git add -A
-   git commit -m "feat: [STORY_ID] - [STORY_TITLE]"
+   git commit -m "feat: [PRD_ID]/[STORY_ID] - [STORY_TITLE]"
    ```
+   Note: Get PRD_ID from the `prdId` field in prd.json (e.g., PRD-001/US-007)
 9. **Update prd.json:**
    - Set `passes: true`
    - Fill `learnings` with key insights
