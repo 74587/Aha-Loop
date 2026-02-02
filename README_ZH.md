@@ -191,9 +191,9 @@ your-project/
 
 MIT
 
-## ⭐ Star 历史
+## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=YougLin-dev/Aha-Loop&type=Date)](https://star-history.com/#YougLin-dev/Aha-Loop&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=YougLin-dev/Aha-Loop&type=timeline&legend=top-left)](https://www.star-history.com/#YougLin-dev/Aha-Loop&type=timeline&legend=top-left)
 
 ---
 
